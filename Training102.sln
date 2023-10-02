@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.API", "Training102.API\Training102.API.csproj", "{C3A96F8E-F7F2-41BA-A4DF-4E2D17D3E744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.DAL", "Training102.DAL\Training102.DAL.csproj", "{6891B524-6670-4379-A688-7B8365727BD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.BAL", "Training102.BAL\Training102.BAL.csproj", "{66CA9B9F-2EDB-4B35-8DA7-B67A441323E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Training102.UI", "Training102.UI", "{486B7B37-767C-458A-8824-4A1B102FE455}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.WEBUI", "Training102.WEBUI\Training102.WEBUI.csproj", "{C85B7712-D20C-48A5-8849-F00FC45DFFC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.SharedUI", "Training102.SharedUI\Training102.SharedUI.csproj", "{743A8DE3-6743-488A-847B-E9CA783EEB2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3A96F8E-F7F2-41BA-A4DF-4E2D17D3E744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A96F8E-F7F2-41BA-A4DF-4E2D17D3E744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A96F8E-F7F2-41BA-A4DF-4E2D17D3E744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A96F8E-F7F2-41BA-A4DF-4E2D17D3E744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6891B524-6670-4379-A688-7B8365727BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6891B524-6670-4379-A688-7B8365727BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6891B524-6670-4379-A688-7B8365727BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6891B524-6670-4379-A688-7B8365727BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CA9B9F-2EDB-4B35-8DA7-B67A441323E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CA9B9F-2EDB-4B35-8DA7-B67A441323E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CA9B9F-2EDB-4B35-8DA7-B67A441323E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CA9B9F-2EDB-4B35-8DA7-B67A441323E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C85B7712-D20C-48A5-8849-F00FC45DFFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C85B7712-D20C-48A5-8849-F00FC45DFFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C85B7712-D20C-48A5-8849-F00FC45DFFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C85B7712-D20C-48A5-8849-F00FC45DFFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C85B7712-D20C-48A5-8849-F00FC45DFFC1} = {486B7B37-767C-458A-8824-4A1B102FE455}
+		{743A8DE3-6743-488A-847B-E9CA783EEB2C} = {486B7B37-767C-458A-8824-4A1B102FE455}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84043BA5-9579-4C7F-8A11-F4886A9A3EE2}
+	EndGlobalSection
+EndGlobal
