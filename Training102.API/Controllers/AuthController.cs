@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Training102.BAL.Services.Contract;
 using Training102.BAL.SharedModel;
 using Training102.DAL;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Training102.API.Controllers
 {
@@ -14,14 +16,17 @@ namespace Training102.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
+
         private readonly IConfiguration _configuration;
         private IUserService _userService;
 
-        public AuthController(UserManager<User> userManager, IConfiguration configuration, IUserService userService)
+        public AuthController(UserManager<User> userManager, IConfiguration configuration, IUserService userService, RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
             _configuration = configuration;
             _userService = userService;
+         _roleManager = roleManager;
         }
 
         [HttpPost("register")]
@@ -29,48 +34,42 @@ namespace Training102.API.Controllers
         {
             if (ModelState.IsValid)
             {
+               var roleName= await  _roleManager.FindByNameAsync("User");
 
-                var result = await _userService.RegisterUserAsync(model);
+                var result = await _userService.RegisterUserAsync(model, roleName.Name);
 
                 if (result.IsSuccessful)
                 {
-                    return Ok(result);
+                    // Assuming you have a role called "User" (you can replace it with your desired role name)
+
+                        // Assign the "User" role to the newly registered user
+                        var user = await _userManager.FindByNameAsync(model.UserName);
+                        await _userManager.AddToRoleAsync(user, "User");
+                        return Ok(result);
+                    
                 }
 
-
-                return BadRequest(result);
+                return BadRequest(new { Message = "Invalid registration data", Errors = ModelState.Values });
             }
+            return Ok (ModelState.Select(c=>c.Value));
 
-            return BadRequest(new { Message = "Invalid registration data", Errors = ModelState.Values });
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
-
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            if (ModelState.IsValid) 
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]);
+                var result = await _userService.LoginUserAsync(model);
 
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    //Subject = new ClaimsIdentity(new Claim[]
-                    //{
-                    //    new Claim(ClaimTypes.Name, user.Id),
-                    //}),
-                    Expires = DateTime.UtcNow.AddHours(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                };
-
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var tokenString = tokenHandler.WriteToken(token);
-
-                return Ok(new { Token = tokenString });
+                if (result.IsSuccessful)
+                    return Ok(result);
+                return BadRequest(result);
             }
-
-            return Unauthorized(new { Message = "Invalid credentials" });
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+           
+            return BadRequest(errors);
+         
         }
     }
 }

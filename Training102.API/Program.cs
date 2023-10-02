@@ -17,36 +17,38 @@ namespace Training102.API
 
             // Add services to the container.
 
-            _ = builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(connectionString: builder.Configuration["ConnectionString:ApplicationDB"]));
+         builder.Services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(connectionString: builder.Configuration["ConnectionString:ApplicationDB"]));
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
             {
                 options.Password.RequiredUniqueChars = 0;
+                options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
 
-            builder.Services.AddAuthentication(options => 
+           builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer(JwtOptions => {
-                JwtOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                .AddJwtBearer(JwtOptions =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = "",
-                    ValidIssuer = "",
-                    RequireExpirationTime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                    .GetBytes(builder.Configuration["API:SymmetricSecurityKey"]))
-                  };
-            });
+                    JwtOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudience = builder.Configuration["AuthSetting:ValidAudience"],
+                        ValidIssuer = builder.Configuration["AuthSetting:ValidIssuer"],
+                        RequireExpirationTime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                        .GetBytes(s: builder.Configuration["AuthSetting:SymmetricSecurityKey"]))
+                    };
+                });
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -65,6 +67,7 @@ namespace Training102.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

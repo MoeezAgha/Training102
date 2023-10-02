@@ -2,11 +2,11 @@
 
 namespace Training102.BAL.SharedModel
 {
-    public record LoginViewModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Please enter your username or email.")]
         [Display(Name = "Username or Email")]
-        public string UserName { get; init; }
+        public string EmailOrUserName { get; init; }
 
         [Required(ErrorMessage = "Please enter your password.")]
         [DataType(DataType.Password)]
@@ -14,6 +14,6 @@ namespace Training102.BAL.SharedModel
         public string Password { get; init; }
 
         [Display(Name = "Remember Me")]
-        public bool RememberMe { get; init; }
+        public bool RememberMe { get; init; } = false;
     }
 }

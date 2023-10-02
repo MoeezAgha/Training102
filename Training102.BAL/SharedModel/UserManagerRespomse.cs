@@ -16,5 +16,6 @@ namespace Training102.BAL.SharedModel
         // For example, to return user information after registration or login
         public string? UserId { get; set; }
         public string? Username { get; set; }
+        public DateTime? ExprieDate { get; set; }
     }
 }

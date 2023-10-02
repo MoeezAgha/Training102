@@ -9,6 +9,7 @@ namespace Training102.BAL.Services.Contract
 {
     public interface IUserService
     {
-        Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel registerViewModel);
+        Task<UserManagerResponse> RegisterUserAsync(RegisterViewModel registerViewModel, string role);
+        Task<UserManagerResponse> LoginUserAsync(LoginViewModel loginViewModel);
     }
 }
