@@ -83,7 +83,8 @@ namespace Training102.BAL.Services.ConcreateImplementation
             {
              new Claim(ClaimTypes.Email,user.Email),
              new Claim(ClaimTypes.NameIdentifier , user.UserName),
-             new Claim(ClaimTypes.Role , "Admin")
+             new Claim(ClaimTypes.Role , "Admin"),
+                    new Claim(ClaimTypes.Name , "agha")
             };
 
             var keyBuffer = new SymmetricSecurityKey(Encoding.UTF8

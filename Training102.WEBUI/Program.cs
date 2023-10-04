@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Training102.WEBUI.Data;
 
 namespace Training102.WEBUI
@@ -14,6 +17,29 @@ namespace Training102.WEBUI
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddScoped<AuthenticationService>();
+            
+            builder.Services.AddScoped(sp =>
+            {
+                var httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri("https://localhost:7128") // Replace with your API's base URL
+                };
+                return httpClient;
+            });
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = "http://test.com",
+            ValidAudience = "http://test.com",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("This is the key that we will use in the encrption"))
+        };
+    });
 
             var app = builder.Build();
 
@@ -24,6 +50,9 @@ namespace Training102.WEBUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+
 
             app.UseHttpsRedirection();
 
