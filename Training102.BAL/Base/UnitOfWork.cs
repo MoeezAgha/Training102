@@ -16,12 +16,17 @@ namespace Training102.BAL.Base
 
         public UserRepository UserRepository { get; set; }
 
+        public TrainingRepository TrainingRepository { get; set; }
+
+        public QuizRepository QuizRepository { get; set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
 
             UserRepository = new UserRepository(_context);
-
+            TrainingRepository = new TrainingRepository(_context);
+            QuizRepository = new QuizRepository(_context);
 
         }
 

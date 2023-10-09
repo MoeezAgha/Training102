@@ -6,6 +6,10 @@ namespace Training102.BAL.Interfaces
     {
 
         public UserRepository UserRepository { get;  }
+        public TrainingRepository TrainingRepository { get; }
+
+        public QuizRepository QuizRepository { get; }
+
         Task<int> CommitAsync();
     }
 

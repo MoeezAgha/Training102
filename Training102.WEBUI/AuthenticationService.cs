@@ -10,8 +10,12 @@ namespace Training102.WEBUI
         {
             _httpClient = httpClient;
         }
+
+
         public class LoginViewModel
         {
+
+
             [Required(ErrorMessage = "Please enter your username or email.")]
             [Display(Name = "Username or Email")]
             public string EmailOrUserName { get; init; }

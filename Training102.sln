@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.WEBUI", "Traini
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.SharedUI", "Training102.SharedUI\Training102.SharedUI.csproj", "{743A8DE3-6743-488A-847B-E9CA783EEB2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Training102.SharedModel", "Training102.SharedModel\Training102.SharedModel.csproj", "{FC38BE80-6BCB-4057-9A38-8E5764920784}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{743A8DE3-6743-488A-847B-E9CA783EEB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC38BE80-6BCB-4057-9A38-8E5764920784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC38BE80-6BCB-4057-9A38-8E5764920784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC38BE80-6BCB-4057-9A38-8E5764920784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC38BE80-6BCB-4057-9A38-8E5764920784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

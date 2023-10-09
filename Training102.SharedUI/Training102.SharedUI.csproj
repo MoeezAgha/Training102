@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Training102.SharedModel\Training102.SharedModel.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -14,6 +14,8 @@ using Training102.BAL.Interfaces;
 using System.Xml;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
+using AutoMapper;
 
 namespace Training102.API
 {
@@ -59,18 +61,14 @@ namespace Training102.API
                         .GetBytes(s: builder.Configuration["AuthSetting:SymmetricSecurityKey"]))
                     };
                 });
+            builder.Services.AddAutoMapper(typeof(IMapper));
 
-         
-            //var options = new JsonSerializerOptions
-            //{
-            //    ReferenceHandler = ReferenceHandler.IgnoreCycles
-            //};
 
-            //var jsonString = JsonSerializer.Serialize(yourObject, options);
+
             // Add services to the container.
-            //     DependencyInjectionConfiguration.ConfigureServices(builder.Services);
-            //   builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            RegisterServicesFromBAL.ConfigureServices(builder.Services);
+
+         //   builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
