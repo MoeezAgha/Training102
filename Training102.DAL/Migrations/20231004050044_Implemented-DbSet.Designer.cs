@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Training102.DAL;
 
@@ -11,9 +12,10 @@ using Training102.DAL;
 namespace Training102.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231004050044_Implemented-DbSet")]
+    partial class ImplementedDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,13 +165,7 @@ namespace Training102.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"), 1L, 1);
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("QuestionId")
@@ -197,12 +193,6 @@ namespace Training102.DAL.Migrations
                     b.Property<int?>("CorrectAnswerId")
                         .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("QuizId")
                         .HasColumnType("int");
@@ -235,12 +225,6 @@ namespace Training102.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -267,12 +251,6 @@ namespace Training102.DAL.Migrations
 
                     b.Property<DateTime>("CompletionDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPass")
                         .HasColumnType("bit");
@@ -310,12 +288,6 @@ namespace Training102.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -337,12 +309,6 @@ namespace Training102.DAL.Migrations
 
                     b.Property<DateTime>("AssignmentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<int>("TrainingId")
                         .HasColumnType("int");

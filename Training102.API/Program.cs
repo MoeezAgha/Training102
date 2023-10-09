@@ -7,6 +7,14 @@ using System.Text;
 using Training102.DAL;
 using Training102.BAL.Services.ConcreateImplementation;
 using Training102.BAL.Services.Contract;
+using Training102.BAL;
+using Training102.BAL.Base.Repository;
+using Training102.BAL.Base;
+using Training102.BAL.Interfaces;
+using System.Xml;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+
 namespace Training102.API
 {
     public class Program
@@ -28,9 +36,11 @@ namespace Training102.API
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            builder.Services.AddControllers().AddJsonOptions(x =>
+                            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
-           builder.Services.AddAuthentication(options =>
+            builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -49,7 +59,18 @@ namespace Training102.API
                         .GetBytes(s: builder.Configuration["AuthSetting:SymmetricSecurityKey"]))
                     };
                 });
+
+         
+            //var options = new JsonSerializerOptions
+            //{
+            //    ReferenceHandler = ReferenceHandler.IgnoreCycles
+            //};
+
+            //var jsonString = JsonSerializer.Serialize(yourObject, options);
             // Add services to the container.
+            //     DependencyInjectionConfiguration.ConfigureServices(builder.Services);
+            //   builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

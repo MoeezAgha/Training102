@@ -26,7 +26,7 @@ namespace Training102.API.Controllers
             _userManager = userManager;
             _configuration = configuration;
             _userService = userService;
-         _roleManager = roleManager;
+            _roleManager = roleManager;
         }
 
         [HttpPost("register")]
