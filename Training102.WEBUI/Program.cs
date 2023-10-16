@@ -1,8 +1,11 @@
+
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Training102.SharedUI;
 using Training102.WEBUI.Data;
 
 namespace Training102.WEBUI
@@ -18,7 +21,7 @@ namespace Training102.WEBUI
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddScoped<AuthenticationService>();
-            
+
             builder.Services.AddScoped(sp =>
             {
                 var httpClient = new HttpClient
@@ -27,6 +30,12 @@ namespace Training102.WEBUI
                 };
                 return httpClient;
             });
+
+            builder.Services.AddHttpClient("BasedApi", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7128");
+            });
+            builder.Services.AddBlazoredLocalStorage();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

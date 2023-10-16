@@ -1,4 +1,12 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using System.Reflection
+@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.AspNetCore.Components.Routing
+
+@using Microsoft.Extensions.Logging
+
+
+
+<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@traniningSharedUI">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -10,3 +18,15 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+
+@code {
+    private List<Assembly> traniningSharedUI = new()
+    {
+
+        typeof(Training102.SharedUI.AuthenticationService).Assembly
+
+    };
+
+    
+}

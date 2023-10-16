@@ -63,7 +63,7 @@ namespace Training102.API
                 });
             builder.Services.AddAutoMapper(typeof(IMapper));
 
-
+           // 
 
             // Add services to the container.
             RegisterServicesFromBAL.ConfigureServices(builder.Services);
