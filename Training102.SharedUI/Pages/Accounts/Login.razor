@@ -1,6 +1,9 @@
 ﻿@page "/login"
+@using Microsoft.AspNetCore.Components.Authorization
 
+@inject      AuthenticationService authService ;
 
+@inject  AuthenticationStateProvider authProvider;
 <h1>Login</h1>
 
 <form @onsubmit="SubmitLoginForm">
@@ -28,13 +31,16 @@
     private string loginError;
     private Training102.BAL.SharedModel.UserManagerResponse userManager;
 
-    [Inject]
-    private AuthenticationService authService { get; set; }
+
+
 
     private async Task SubmitLoginForm()
     {
         userManager = await authService.LoginAsync(username, password);
-
+   
+       (authProvider as CustimStateProvider).NotifyAuthState();
+        
+       
         if (userManager.IsSuccessful)
         {
            // var tokenResponse = await jwtToken.con
@@ -49,3 +55,20 @@
         }
     }
 }
+
+
+
+    <AuthorizeView>
+        <Authorized>
+        <h1> test Authorized @context.User.Claims.FirstOrDefault(c=>c.Type == "testCalim").Value</h1>
+           
+
+        </Authorized>
+        <NotAuthorized>
+        <h1> NotAuthorized NotAuthorized</h1>
+
+        </NotAuthorized>
+
+    </AuthorizeView>
+    
+

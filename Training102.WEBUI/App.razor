@@ -4,8 +4,9 @@
 
 @using Microsoft.Extensions.Logging
 
+<CascadingAuthenticationState >
 
-
+    
 <Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@traniningSharedUI">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -19,6 +20,7 @@
     </NotFound>
 </Router>
 
+</CascadingAuthenticationState>
 
 @code {
     private List<Assembly> traniningSharedUI = new()

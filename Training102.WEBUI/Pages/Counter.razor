@@ -16,3 +16,19 @@
         currentCount++;
     }
 }
+
+
+<AuthorizeView>
+    <Authorized>
+        <h1> test Authorized @context.User.Claims.FirstOrDefault(c=>c.Type == "testCalim").Value</h1>
+
+
+    </Authorized>
+    <NotAuthorized>
+        <h1> NotAuthorized NotAuthorized</h1>
+
+    </NotAuthorized>
+
+</AuthorizeView>
+
+

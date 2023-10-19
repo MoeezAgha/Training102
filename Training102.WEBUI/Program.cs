@@ -2,6 +2,7 @@
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -20,7 +21,10 @@ namespace Training102.WEBUI
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
-            builder.Services.AddScoped<AuthenticationService>();
+            
+            builder.Services.AddScoped<Training102.SharedUI.AuthenticationService>();
+            builder.Services.AddScoped< AuthenticationStateProvider,CustimStateProvider > ();
+            builder.Services.AddAuthenticationCore();
 
             builder.Services.AddScoped(sp =>
             {
